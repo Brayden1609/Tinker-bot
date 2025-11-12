@@ -49,7 +49,14 @@ app.listen(PORT, '0.0.0.0', () => {
 });
 
 // ==== DISCORD BOT SETUP ====
-const TOKEN = 'MTQzNzk3NDE0MDY4OTU4NDIwOQ.GH3wX9.vEADVNr9Y0epPzbDsM6896nXdO8IP8b-b8aqsM'; // replace with your token
+require('dotenv').config();
+const { Client, GatewayIntentBits, Events } = require('discord.js');
+
+const client = new Client({
+    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent]
+});
+
+const TOKEN = process.env.TOKEN;
 
 client.once(Events.ClientReady, () => {
     console.log(`Logged in as ${client.user.tag}! 💖`);
