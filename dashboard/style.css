@@ -1,0 +1,17 @@
+body {
+    font-family: sans-serif;
+    background: #ffe4e1;
+    text-align: center;
+    padding: 2rem;
+}
+
+button {
+    margin: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+h1 {
+    color: #ff69b4;
+}
