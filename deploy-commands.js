@@ -3,7 +3,7 @@ const client = new Client({
     intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent]
 });
 
-const TOKEN = 'MTQzNzk3NDE0MDY4OTU4NDIwOQ.GH3wX9.vEADVNr9Y0epPzbDsM6896nXdO8IP8b-b8aqsM'; // replace with your actual token
+const TOKEN = ''; // replace with your actual token
 
 client.once(Events.ClientReady, () => {
     console.log(`Logged in as Tinker.dev! 💖`);
