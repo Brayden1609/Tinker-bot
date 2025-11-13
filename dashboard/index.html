@@ -1,28 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tinker Dashboard</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <h1>Tinker.dev Dashboard 💖</h1>
+// script.js
 
-    <div>
-        <h2>Bot Status</h2>
-        <p id="status">Loading...</p>
-        <button onclick="setStatus('online')">Online</button>
-        <button onclick="setStatus('dnd')">Do Not Disturb</button>
-        <button onclick="setStatus('idle')">Idle</button>
-    </div>
+// Fetch current bot status on load
+async function fetchStatus() {
+    try {
+        const res = await fetch('/api/status');
+        const data = await res.json();
+        document.getElementById('status').innerText = data.status;
+    } catch (err) {
+        console.error(err);
+        document.getElementById('status').innerText = 'Error fetching status';
+    }
+}
 
-    <div>
-        <h2>Chaos Mode</h2>
-        <button onclick="triggerChaos()">Trigger Chaos! 🤯</button>
-        <p id="chaosResult"></p>
-    </div>
+// Set bot status
+async function setStatus(newStatus) {
+    try {
+        const res = await fetch('/api/status', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ status: newStatus })
+        });
+        const data = await res.json();
+        document.getElementById('status').innerText = data.updated;
+    } catch (err) {
+        console.error(err);
+        alert('Failed to update status!');
+    }
+}
 
-    <script src="script.js"></script>
-</body>
-</html>
+// Trigger chaos event
+async function triggerChaos() {
+    try {
+        const res = await fetch('/api/chaos', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' }
+        });
+        const data = await res.json();
+        document.getElementById('chaosResult').innerText = data.triggered;
+    } catch (err) {
+        console.error(err);
+        document.getElementById('chaosResult').innerText = 'Chaos failed 😢';
+    }
+}
+
+// Initialize
+fetchStatus();
