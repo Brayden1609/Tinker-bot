@@ -8,32 +8,49 @@
 </head>
 <body>
     <header>
-        <h1>BucketHead Dashboard 💀</h1>
+        <h1>BucketHead Dashboard</h1>
     </header>
 
     <main>
-        <section id="bot-status">
-            <h2>Bot Status</h2>
-            <p id="status">Loading...</p>
-            <div class="buttons">
-                <button onclick="setStatus('online')">Online</button>
-                <button onclick="setStatus('dnd')">Do Not Disturb</button>
-                <button onclick="setStatus('idle')">Idle</button>
+        <div class="dashboard-container">
+            <!-- Bot Status Panel -->
+            <div class="card">
+                <h2>Bot Status</h2>
+                <p id="status">Loading...</p>
+                <div class="buttons">
+                    <button onclick="setStatus('online')">Online</button>
+                    <button onclick="setStatus('dnd')">Do Not Disturb</button>
+                    <button onclick="setStatus('idle')">Idle</button>
+                </div>
             </div>
-        </section>
 
-        <section id="chaos-mode">
-            <h2>Chaos Mode</h2>
-            <button onclick="triggerChaos()">Trigger Chaos 🤯</button>
-            <p id="chaosResult"></p>
-        </section>
+            <!-- Chaos Mode Panel -->
+            <div class="card">
+                <h2>Chaos Mode</h2>
+                <button onclick="triggerChaos()">Trigger Chaos! 🤯</button>
+                <p id="chaosResult"></p>
+            </div>
+
+            <!-- Command Input Panel -->
+            <div class="card">
+                <h2>Send Command</h2>
+                <input type="text" id="commandInput" placeholder="/hug @user">
+                <button onclick="sendCommand()">Send</button>
+                <p id="commandResult"></p>
+            </div>
+
+            <!-- Activity Feed Panel -->
+            <div class="card">
+                <h2>Activity Feed</h2>
+                <ul id="activityFeed">
+                    <!-- JS will append events here -->
+                </ul>
+            </div>
+        </div>
     </main>
 
     <footer>
-        <p>&copy; 2025 BucketHead.dev | 
-            <a href="tos.html">Terms of Service</a> | 
-            <a href="privacy.html">Privacy Policy</a>
-        </p>
+        <p>© 2025 BucketHead.dev</p>
     </footer>
 
     <script src="script.js"></script>
