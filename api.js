@@ -1,43 +1,75 @@
-// api.js (Node.js / Vercel Serverless function style)
-let botStatus = 'offline';
+// api.js
+const express = require('express');
+const router = express.Router();
 
-export default async function handler(req, res) {
-    const { method } = req;
+// --- In-memory storage for demonstration ---
+let botStatus = 'online'; // default bot status
+const activityLog = [];
 
-    if (method === 'GET') {
-        // e.g., /api/status
-        return res.json({ status: botStatus });
+// Helper to add activity
+function logActivity(message) {
+    const timestamp = new Date().toLocaleTimeString();
+    activityLog.unshift(`[${timestamp}] ${message}`);
+    if (activityLog.length > 50) activityLog.pop(); // keep only 50 items
+}
+
+// --- GET Bot Status ---
+router.get('/status', (req, res) => {
+    res.json({ status: botStatus });
+});
+
+// --- POST Bot Status ---
+router.post('/status', (req, res) => {
+    const { status } = req.body;
+    if (!status) return res.status(400).json({ error: 'No status provided' });
+
+    botStatus = status;
+    logActivity(`Bot status changed to ${status}`);
+    res.json({ updated: botStatus });
+});
+
+// --- POST Chaos Mode ---
+router.post('/chaos', (req, res) => {
+    const chaosEvents = [
+        "✨ Confetti everywhere! ✨",
+        "💥 BOOM! Something exploded! 💥",
+        "🍕 Pizza rain! 🍕",
+        "👻 A ghost appears! 👻",
+        "🎉 You feel... magical? 🎉"
+    ];
+    const randomEvent = chaosEvents[Math.floor(Math.random() * chaosEvents.length)];
+    logActivity(`Chaos triggered: ${randomEvent}`);
+    res.json({ triggered: randomEvent });
+});
+
+// --- POST Command ---
+router.post('/command', (req, res) => {
+    const { command } = req.body;
+    if (!command) return res.status(400).json({ error: 'No command provided' });
+
+    let response = '';
+    // Simple command handling
+    if (command.toLowerCase() === 'hug') {
+        response = 'Here’s a big hug! 🤗💖';
+    } else if (command.toLowerCase() === 'surprise') {
+        const surpriseEvents = [
+            "🎁 You got a surprise gift!",
+            "🌈 Rainbow appears!",
+            "🪄 Magic spell cast!",
+            "🚀 Rocket launched!"
+        ];
+        response = surpriseEvents[Math.floor(Math.random() * surpriseEvents.length)];
+    } else {
+        response = `Command "${command}" not recognized.`;
     }
 
-    if (method === 'POST') {
-        const body = await req.json();
+    logActivity(`Command sent: "${command}" => ${response}`);
+    res.json({ response });
+});
 
-        if ('status' in body) {
-            botStatus = body.status;
-            return res.json({ updated: botStatus });
-        }
+// --- GET Activity Feed ---
+router.get('/activity', (req, res) => {
+    res.json({ activity: activityLog });
+});
 
-        if ('command' in body) {
-            const response = handleCommand(body.command); // your bot logic
-            return res.json({ response });
-        }
-
-        if (body.chaos) {
-            const chaosEvent = triggerChaos(); // your chaos logic
-            return res.json( { triggered: chaosEvent });
-        }
-    }
-
-    res.status(405).json({ error: 'Method not allowed' });
-}
-
-// Example functions for demo
-function handleCommand(cmd) {
-    if (cmd.toLowerCase() === 'hug') return '🤗 Hug sent!';
-    return `You typed: ${cmd}`;
-}
-
-function triggerChaos() {
-    const events = ["✨ Confetti everywhere!", "💥 BOOM!", "🍕 Pizza rain!"];
-    return events[Math.floor(Math.random() * events.length)];
-}
+module.exports = router;
