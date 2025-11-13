@@ -1,3 +1,4 @@
+// ---- ELEMENT REFERENCES ----
 const statusEl = document.getElementById('status');
 const chaosResultEl = document.getElementById('chaosResult');
 const commandInput = document.getElementById('commandInput');
@@ -75,4 +76,4 @@ function addActivity(message) {
 }
 
 // ---- INITIAL LOAD ----
-getStatus();
+document.addEventListener("DOMContentLoaded", getStatus);
