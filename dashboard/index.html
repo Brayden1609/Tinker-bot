@@ -1,64 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BucketHead Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard | BucketHead.dev</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="dashboard.html" class="active">Dashboard</a>
-            <a href="privacy.html">Privacy Policy</a>
-            <a href="tos.html">Terms of Service</a>
-        </nav>
-        <h1>BucketHead Dashboard</h1>
-    </header>
+<header>
+    <h1>BucketHead Dashboard</h1>
+    <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="tos.html">TOS</a>
+    </nav>
+</header>
 
-    <main>
-        <section class="panel">
-            <h2>Bot Status</h2>
-            <p id="status">Loading...</p>
-            <div class="buttons">
-                <button onclick="setStatus('online')">Online</button>
-                <button onclick="setStatus('dnd')">Do Not Disturb</button>
-                <button onclick="setStatus('idle')">Idle</button>
-            </div>
-        </section>
+<main>
+    <div class="panel">
+        <h2>Bot Status</h2>
+        <p id="status">Loading...</p>
+        <button onclick="setStatus('online')">Online</button>
+        <button onclick="setStatus('dnd')">Do Not Disturb</button>
+        <button onclick="setStatus('idle')">Idle</button>
+    </div>
 
-        <section class="panel">
-            <h2>Chaos Mode</h2>
-            <button onclick="triggerChaos()">Trigger Chaos</button>
-            <p id="chaosResult"></p>
-        </section>
+    <div class="panel">
+        <h2>Chaos Mode</h2>
+        <button onclick="triggerChaos()">Trigger Chaos</button>
+        <p id="chaosResult"></p>
+    </div>
 
-        <section class="panel">
-            <h2>Commands</h2>
-            <div class="commands">
-                <button onclick="sendCommand('hug')">@Hug</button>
-                <button onclick="sendCommand('surprise')">Surprise</button>
-            </div>
-            <p id="commandResult"></p>
-        </section>
+    <div class="panel">
+        <h2>Other Panel 1</h2>
+        <p>Example content here.</p>
+    </div>
 
-        <section class="panel">
-            <h2>Server Info</h2>
-            <p id="serverName">Server: N/A</p>
-            <p id="memberCount">Members: N/A</p>
-            <p id="channelCount">Channels: N/A</p>
-        </section>
+    <div class="panel">
+        <h2>Other Panel 2</h2>
+        <p>Example content here.</p>
+    </div>
+</main>
 
-        <section class="panel">
-            <h2>Misc / Other</h2>
-            <p>Placeholder for future panels or info</p>
-        </section>
-    </main>
-
-    <footer>
-        <p>© 2025 BucketHead.dev | All interactions are local</p>
-    </footer>
-
-    <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
