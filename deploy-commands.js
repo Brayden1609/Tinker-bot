@@ -45,4 +45,3 @@ client.login(TOKEN);
         console.error(error);
     }
 })();
->>>>>>> 0f93f42 (Update Deploy-commqnds.js)
