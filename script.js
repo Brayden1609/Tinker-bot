@@ -1,72 +1,70 @@
-const API_URL = "https://<YOUR_PUBLIC_API_URL>"; // replace with ngrok or Cloudflare tunnel URL
+// dashboard/script.js
+// Replace API_BASE if your tunnel URL changes
+const API_BASE = 'https://drawing-temperatures-brothers-reynolds.trycloudflare.com';
 
-// script.js
+const statusEl = document.getElementById('status');
+const chaosEl = document.getElementById('chaosResult');
 
-// Fetch current bot status on load
+async function fetchJSON(url, options = {}) {
+  try {
+    const res = await fetch(url, options);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return await res.json();
+  } catch (err) {
+    throw err;
+  }
+}
+
 async function fetchStatus() {
-    try {
-        const res = await fetch('/api/status');
-        const data = await res.json();
-        document.getElementById('status').innerText = data.status;
-    } catch (err) {
-        console.error(err);
-        document.getElementById('status').innerText = 'Error fetching status';
-    }
+  statusEl.textContent = 'Loading…';
+  try {
+    const data = await fetchJSON(`${API_BASE}/api/status`);
+    statusEl.textContent = data.status ?? 'unknown';
+  } catch (err) {
+    console.error('fetchStatus error', err);
+    statusEl.textContent = 'Error fetching status';
+  }
 }
 
-// Set bot status
 async function setStatus(newStatus) {
-    try {
-        const res = await fetch('/api/status', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ status: newStatus })
-        });
-        const data = await res.json();
-        document.getElementById('status').innerText = data.updated;
-    } catch (err) {
-        console.error(err);
-        alert('Failed to update status!');
-    }
+  // simple UI feedback
+  const old = statusEl.textContent;
+  statusEl.textContent = 'Updating…';
+  try {
+    const data = await fetchJSON(`${API_BASE}/api/status`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status: newStatus })
+    });
+    statusEl.textContent = data.updated ?? newStatus;
+  } catch (err) {
+    console.error('setStatus error', err);
+    statusEl.textContent = old;
+    alert('Failed to update status. Check the tunnel & Termux bot.');
+  }
 }
 
-// Trigger chaos event
 async function triggerChaos() {
-    try {
-        const res = await fetch('/api/chaos', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' }
-        });
-        const data = await res.json();
-        document.getElementById('chaosResult').innerText = data.triggered;
-    } catch (err) {
-        console.error(err);
-        document.getElementById('chaosResult').innerText = 'Chaos failed 😢';
-    }
+  chaosEl.textContent = 'Triggering…';
+  try {
+    const data = await fetchJSON(`${API_BASE}/api/chaos`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' }
+    });
+    chaosEl.textContent = data.triggered ?? 'No response';
+  } catch (err) {
+    console.error('triggerChaos error', err);
+    chaosEl.textContent = 'Chaos failed 😢';
+    alert('Chaos failed — check that your bot/API is running and reachable.');
+  }
 }
 
-// Initialize
-fetchStatus();       method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ status })
-        });
-        getStatus();
-    } catch (err) {
-        console.error(err);
-    }
-}
+// wire up buttons if you want inline handlers in HTML removed, uncomment and use:
+// document.getElementById('btn-online').onclick = () => setStatus('online');
 
-// Trigger chaos
-async function triggerChaos() {
-    try {
-        const res = await fetch(`${API_URL}/api/chaos`, { method: "POST" });
-        const data = await res.json();
-        document.getElementById("chaosResult").textContent = data.triggered;
-    } catch (err) {
-        document.getElementById("chaosResult").textContent = "Error triggering chaos";
-        console.error(err);
-    }
-}
+window.addEventListener('load', () => {
+  fetchStatus();
 
-// Load status on page load
-getStatus();
+  // refresh status every 12s so UI stays in sync
+  setInterval(fetchStatus, 12_000);
+});
