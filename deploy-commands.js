@@ -15,9 +15,10 @@ client.on(Events.InteractionCreate, async interaction => {
     if (!interaction.isCommand()) return;
 
     if (interaction.commandName === 'hug') {
-        await interaction.reply(`Here’s a big hug for you! 🤗💖`);
-    }
-
+        await interaction.reply(`Here’s a big hug for ${interaction.user}! 🤗💖`);
+    allowedMentions: { users: [interaction.user.id] } // ensures only the person gets pinged
+    });
+}
     if (interaction.commandName === 'surprise') {
         const events = [
             "✨ Confetti everywhere! ✨",
