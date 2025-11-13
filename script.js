@@ -1,22 +1,52 @@
 const API_URL = "https://<YOUR_PUBLIC_API_URL>"; // replace with ngrok or Cloudflare tunnel URL
 
-// Get bot status
-async function getStatus() {
+// script.js
+
+// Fetch current bot status on load
+async function fetchStatus() {
     try {
-        const res = await fetch(`${API_URL}/api/status`);
+        const res = await fetch('/api/status');
         const data = await res.json();
-        document.getElementById("status").textContent = data.status;
+        document.getElementById('status').innerText = data.status;
     } catch (err) {
-        document.getElementById("status").textContent = "Error fetching status";
         console.error(err);
+        document.getElementById('status').innerText = 'Error fetching status';
     }
 }
 
 // Set bot status
-async function setStatus(status) {
+async function setStatus(newStatus) {
     try {
-        await fetch(`${API_URL}/api/status`, {
-            method: "POST",
+        const res = await fetch('/api/status', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ status: newStatus })
+        });
+        const data = await res.json();
+        document.getElementById('status').innerText = data.updated;
+    } catch (err) {
+        console.error(err);
+        alert('Failed to update status!');
+    }
+}
+
+// Trigger chaos event
+async function triggerChaos() {
+    try {
+        const res = await fetch('/api/chaos', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' }
+        });
+        const data = await res.json();
+        document.getElementById('chaosResult').innerText = data.triggered;
+    } catch (err) {
+        console.error(err);
+        document.getElementById('chaosResult').innerText = 'Chaos failed 😢';
+    }
+}
+
+// Initialize
+fetchStatus();       method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ status })
         });
