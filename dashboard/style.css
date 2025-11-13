@@ -1,56 +1,75 @@
-body {
-    font-family: Arial, sans-serif;
+/* --- RESET --- */
+* {
     margin: 0;
     padding: 0;
-    background: #fefefe;
-    color: #222;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background-color: #f8f9fa;
+    color: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 header {
-    background: #111;
-    color: #fff;
-    padding: 1rem 2rem;
+    background-color: #1e1e1e;
+    padding: 1rem 0;
 }
 
-header h1 {
-    margin: 0;
-    font-size: 1.8rem;
-}
-
-nav {
-    margin-top: 0.5rem;
-}
-
-nav .tabs {
-    list-style: none;
-    padding: 0;
+.nav-tabs {
     display: flex;
-    gap: 1rem;
+    justify-content: center;
+    list-style: none;
+    gap: 2rem;
 }
 
-nav .tabs li a {
+.nav-tabs a {
     color: #fff;
     text-decoration: none;
+    font-weight: 600;
     padding: 0.5rem 1rem;
-    display: inline-block;
+    transition: background 0.2s, color 0.2s;
     border-radius: 5px;
-    transition: background 0.2s;
 }
 
-nav .tabs li a:hover,
-nav .tabs li a.active {
-    background: #ff4757;
+.nav-tabs a:hover {
+    background-color: #fff;
+    color: #1e1e1e;
+}
+
+.nav-tabs a.active {
+    background-color: #ff5e57;
+    color: #fff;
 }
 
 main {
-    padding: 2rem;
+    flex: 1;
+    padding: 2rem 1rem;
     max-width: 900px;
     margin: 0 auto;
 }
 
-footer {
+.hero {
     text-align: center;
-    padding: 1rem;
-    background: #111;
+    margin-bottom: 2rem;
+}
+
+footer {
+    background-color: #1e1e1e;
     color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: auto;
+}
+
+/* --- MOBILE RESPONSIVE --- */
+@media (max-width: 600px) {
+    .nav-tabs {
+        flex-direction: column;
+        gap: 1rem;
+    }
 }
