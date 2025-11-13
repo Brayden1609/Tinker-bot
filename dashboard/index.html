@@ -8,50 +8,34 @@
 </head>
 <body>
     <header>
-        <h1>BucketHead Dashboard</h1>
+        <nav>
+            <ul class="tabs">
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="privacy.html">Privacy Policy</a></li>
+                <li><a href="tos.html">TOS</a></li>
+            </ul>
+        </nav>
     </header>
 
     <main>
-        <div class="dashboard-container">
-            <!-- Bot Status Panel -->
-            <div class="card">
-                <h2>Bot Status</h2>
-                <p id="status">Loading...</p>
-                <div class="buttons">
-                    <button onclick="setStatus('online')">Online</button>
-                    <button onclick="setStatus('dnd')">Do Not Disturb</button>
-                    <button onclick="setStatus('idle')">Idle</button>
-                </div>
-            </div>
+        <h1>BucketHead Dashboard</h1>
 
-            <!-- Chaos Mode Panel -->
-            <div class="card">
-                <h2>Chaos Mode</h2>
-                <button onclick="triggerChaos()">Trigger Chaos! 🤯</button>
-                <p id="chaosResult"></p>
+        <section>
+            <h2>Bot Status</h2>
+            <p id="status">Loading...</p>
+            <div class="buttons">
+                <button onclick="setStatus('online')">Online</button>
+                <button onclick="setStatus('dnd')">Do Not Disturb</button>
+                <button onclick="setStatus('idle')">Idle</button>
             </div>
+        </section>
 
-            <!-- Command Input Panel -->
-            <div class="card">
-                <h2>Send Command</h2>
-                <input type="text" id="commandInput" placeholder="/hug @user">
-                <button onclick="sendCommand()">Send</button>
-                <p id="commandResult"></p>
-            </div>
-
-            <!-- Activity Feed Panel -->
-            <div class="card">
-                <h2>Activity Feed</h2>
-                <ul id="activityFeed">
-                    <!-- JS will append events here -->
-                </ul>
-            </div>
-        </div>
+        <section>
+            <h2>Chaos Mode</h2>
+            <button onclick="triggerChaos()">Trigger Chaos</button>
+            <p id="chaosResult"></p>
+        </section>
     </main>
-
-    <footer>
-        <p>© 2025 BucketHead.dev</p>
-    </footer>
 
     <script src="script.js"></script>
 </body>
