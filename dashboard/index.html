@@ -1,26 +1,35 @@
-<!DOCTYPE html>  <html lang="en">  
-<head>  
-    <meta charset="UTF-8">  
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-    <title>Tinker Dashboard</title>  
-    <link rel="stylesheet" href="style.css">  
-</head>  
-<body>  
-    <h1>Tinker.dev Dashboard 💖</h1>  <div>  
-    <h2>Bot Status</h2>  
-    <p id="status">Loading...</p>  
-    <button onclick="setStatus('online')">Online</button>  
-    <button onclick="setStatus('dnd')">Do Not Disturb</button>  
-    <button onclick="setStatus('idle')">Idle</button>  
-</div>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tinker Dashboard 💖</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Tinker.dev Dashboard 💖</h1>
 
-<div>  
-    <h2>Chaos Mode</h2>  
-    <button onclick="triggerChaos()">Trigger Chaos! 🤯</button>  
-    <p id="chaosResult"></p>  
-</div>  
+  <div class="section">
+    <h2>Bot Status</h2>
+    <p id="status">Loading…</p>
+    <button id="btn-online">Online</button>
+    <button id="btn-dnd">Do Not Disturb</button>
+    <button id="btn-idle">Idle</button>
+  </div>
 
-<script src="script.js"></script>
+  <div class="section">
+    <h2>Chaos Mode</h2>
+    <button id="btn-chaos">Trigger Chaos! 🤯</button>
+    <p id="chaosResult"></p>
+  </div>
 
-</body>  
-</html> 
+  <script src="script.js"></script>
+  <script>
+    // wire up buttons
+    document.getElementById('btn-online').onclick = () => setStatus('online');
+    document.getElementById('btn-dnd').onclick = () => setStatus('dnd');
+    document.getElementById('btn-idle').onclick = () => setStatus('idle');
+    document.getElementById('btn-chaos').onclick = triggerChaos;
+  </script>
+</body>
+</html>
