@@ -1,101 +1,41 @@
-/* ====== General Styles ====== */
-body {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #121212;
-    color: #f1f1f1;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Service | BucketHead.dev</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+    <h1>Terms of Service</h1>
+    <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="tos.html">TOS</a>
+    </nav>
+</header>
 
-a {
-    text-decoration: none;
-    color: inherit;
-}
+<main>
+    <p>Effective Date: November 13, 2025</p>
 
-/* ====== Header ====== */
-header {
-    background-color: #1e1e1e;
-    padding: 1rem 0;
-    text-align: center;
-    border-bottom: 2px solid #333;
-}
+    <h2>1. Acceptance of Terms</h2>
+    <p>By using BucketHead.dev (the “Service”), you agree to comply with and be bound by these Terms of Service. If you do not agree to these terms, please do not use the Service.</p>
 
-header h1 {
-    margin: 0 0 0.5rem 0;
-    font-size: 2rem;
-}
+    <h2>2. Description of Service</h2>
+    <p>BucketHead.dev provides a Discord bot, BucketHead, and an optional dashboard interface. All interactions and data are stored locally; the Service does not store any user information on external servers.</p>
 
-/* ====== Tabs ====== */
-.tabs {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    border-bottom: 2px solid #333;
-    background-color: #1e1e1e;
-}
+    <h2>3. User Responsibilities</h2>
+    <p>Users are solely responsible for their actions while using the Service, including interactions with the bot, content generated, or any use of the dashboard. Users must comply with all applicable laws and Discord’s Terms of Service.</p>
 
-.tabs button {
-    background: none;
-    border: none;
-    color: #aaa;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    font-weight: bold;
-    transition: color 0.2s, border-bottom 0.2s;
-    border-bottom: 3px solid transparent;
-}
+    <h2>4. Limitations of Liability</h2>
+    <p>BucketHead.dev and its creators are not liable for any damages arising from the use or inability to use the Service. The Service is provided “as is” and without warranty of any kind.</p>
 
-.tabs button.active {
-    color: #ff79c6;
-    border-bottom: 3px solid #ff79c6;
-}
+    <h2>5. Modifications</h2>
+    <p>We reserve the right to modify these Terms of Service at any time. Changes will be effective immediately upon posting to the Service. Continued use of the Service constitutes acceptance of the updated terms.</p>
 
-.tabs button:hover {
-    color: #fff;
-}
-
-/* ====== Tab Panels ====== */
-.tab-content {
-    display: none;
-    padding: 2rem;
-    animation: fadeIn 0.3s ease-in;
-}
-
-.tab-content.active {
-    display: block;
-}
-
-/* ====== Panels inside tabs ====== */
-section {
-    background-color: #1e1e1e;
-    padding: 1.5rem;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.5);
-    margin-bottom: 1.5rem;
-}
-
-section h2 {
-    margin-top: 0;
-    color: #ff79c6;
-}
-
-/* ====== Buttons ====== */
-button.panel-btn {
-    background-color: #444;
-    border: none;
-    color: #fff;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    margin: 0.3rem 0.3rem 0.3rem 0;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-button.panel-btn:hover {
-    background-color: #ff79c6;
-}
-
-/* ====== Animations ====== */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
+    <h2>6. Contact</h2>
+    <p>If you have questions regarding these Terms of Service, please contact us via the bot or support channels.</p>
+</main>
+</body>
+</html>
