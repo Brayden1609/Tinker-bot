@@ -1,17 +1,37 @@
 body {
-    font-family: sans-serif;
-    background: #ffe4e1;
-    text-align: center;
-    padding: 2rem;
-}
-
-button {
-    margin: 0.5rem;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    cursor: pointer;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  background: #fff0f5;
+  color: #333;
+  text-align: center;
+  padding: 2rem;
 }
 
 h1 {
-    color: #ff69b4;
+  color: #ff69b4;
+}
+
+.section {
+  margin: 2rem 0;
+}
+
+button {
+  margin: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  background: #ff69b4;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+
+button:hover {
+  transform: scale(1.1);
+  background: #ff85c1;
+}
+
+#status, #chaosResult {
+  font-weight: bold;
+  margin-top: 1rem;
+  transition: all 0.3s;
 }
