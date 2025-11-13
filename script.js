@@ -1,44 +1,78 @@
-// URL of your bot API (Cloudflare tunnel)
-const API_URL = "https://drawing-temperatures-brothers-reynolds.trycloudflare.com";
+const statusEl = document.getElementById('status');
+const chaosResultEl = document.getElementById('chaosResult');
+const commandInput = document.getElementById('commandInput');
+const commandResultEl = document.getElementById('commandResult');
+const activityFeed = document.getElementById('activityFeed');
 
-// Update status display
-async function loadStatus() {
+const API_BASE = 'https://tinker-bot-rose.vercel.app/'
+
+// ---- BOT STATUS ----
+async function getStatus() {
     try {
-        const res = await fetch(`${API_URL}/api/status`);
+        const res = await fetch(`${API_BASE}/api/status`);
         const data = await res.json();
-        document.getElementById("status").textContent = data.status || "unknown";
+        statusEl.textContent = data.status || 'Unknown';
     } catch (err) {
-        console.error("Failed to fetch status:", err);
-        document.getElementById("status").textContent = "Error 😢";
+        statusEl.textContent = 'Error fetching status';
+        console.error(err);
     }
 }
 
-// Change bot status
 async function setStatus(status) {
     try {
-        const res = await fetch(`${API_URL}/api/status`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
+        const res = await fetch(`${API_BASE}/api/status`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ status })
         });
         const data = await res.json();
-        document.getElementById("status").textContent = data.updated || status;
+        statusEl.textContent = data.updated;
+        addActivity(`Bot status changed to ${data.updated}`);
     } catch (err) {
-        console.error("Failed to set status:", err);
+        console.error(err);
     }
 }
 
-// Trigger chaos mode
+// ---- CHAOS MODE ----
 async function triggerChaos() {
     try {
-        const res = await fetch(`${API_URL}/api/chaos`, { method: "POST" });
+        const res = await fetch(`${API_BASE}/api/chaos`, { method: 'POST' });
         const data = await res.json();
-        document.getElementById("chaosResult").textContent = data.triggered || "No event 😢";
+        chaosResultEl.textContent = data.triggered;
+        addActivity(`Chaos triggered: ${data.triggered}`);
     } catch (err) {
-        console.error("Failed to trigger chaos:", err);
-        document.getElementById("chaosResult").textContent = "Error 😢";
+        chaosResultEl.textContent = 'Error triggering chaos';
+        console.error(err);
     }
 }
 
-// Auto-load status on page load
-window.addEventListener("DOMContentLoaded", loadStatus);
+// ---- SEND COMMAND ----
+async function sendCommand() {
+    const commandText = commandInput.value.trim();
+    if (!commandText) return;
+
+    try {
+        const res = await fetch(`${API_BASE}/api/command`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ command: commandText })
+        });
+        const data = await res.json();
+        commandResultEl.textContent = data.response;
+        addActivity(`Command sent: "${commandText}" => ${data.response}`);
+        commandInput.value = '';
+    } catch (err) {
+        commandResultEl.textContent = 'Error sending command';
+        console.error(err);
+    }
+}
+
+// ---- ACTIVITY FEED ----
+function addActivity(message) {
+    const li = document.createElement('li');
+    li.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+    activityFeed.prepend(li);
+}
+
+// ---- INITIAL LOAD ----
+getStatus();
