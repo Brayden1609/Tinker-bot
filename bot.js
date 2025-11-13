@@ -1,4 +1,5 @@
 // ==== IMPORTS ====
+require('dotenv').config();
 const { Client, GatewayIntentBits, Events } = require('discord.js');
 const express = require('express');
 const path = require('path');
@@ -7,28 +8,25 @@ const path = require('path');
 const client = new Client({
     intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent]
 });
+const TOKEN = process.env.TOKEN;
 
 // ==== EXPRESS DASHBOARD SETUP ====
 const app = express();
 const PORT = 3000;
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'dashboard'))); // dashboard folder serves frontend
+app.use(express.static(path.join(__dirname, 'dashboard')));
 
 // ---- API ENDPOINTS ----
-
-// Get bot status
 app.get('/api/status', (req, res) => {
     res.send({ status: client.presence?.status || 'dnd' });
 });
 
-// Set bot status
 app.post('/api/status', (req, res) => {
     const { status } = req.body;
     client.user.setStatus(status);
     res.send({ updated: status });
 });
 
-// Trigger chaos event
 app.post('/api/chaos', async (req, res) => {
     const events = [
         "✨ Confetti everywhere! ✨",
@@ -49,22 +47,13 @@ app.listen(PORT, '0.0.0.0', () => {
 });
 
 // ==== DISCORD BOT SETUP ====
-require('dotenv').config();
-const { Client, GatewayIntentBits, Events } = require('discord.js');
-
-const client = new Client({
-    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent]
-});
-
-const TOKEN = process.env.TOKEN;
-
 client.once(Events.ClientReady, () => {
     console.log(`Logged in as ${client.user.tag}! 💖`);
     client.user.setActivity("Tinkering 🤪", { type: "PLAYING" });
     client.user.setStatus("dnd");
 });
 
-// Simple fun slash commands
+// Simple slash commands
 client.on(Events.InteractionCreate, async interaction => {
     if (!interaction.isCommand()) return;
 

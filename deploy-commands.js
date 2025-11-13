@@ -1,16 +1,15 @@
-const { Client, GatewayIntentBits, Events } = require('discord.js');
-const client = new Client({
-    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent]
-});
+// deploy-commands.js
+const { REST, Routes } = require('discord.js');
+require('dotenv').config();
 
-const TOKEN = ''; // replace with your actual token
+const commands = [
+    { name: 'hug', description: 'Send a big hug!' },
+    { name: 'surprise', description: 'Trigger a fun event!' },
+];
 
-client.once(Events.ClientReady, () => {
-    console.log(`Logged in as Tinker.dev! 💖`);
-    client.user.setActivity("Tinkering 🤪", { type: "PLAYING" });
-    client.user.setStatus("dnd");
-});
+const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
 
+<<<<<<< HEAD
 client.on(Events.InteractionCreate, async interaction => {
     if (!interaction.isCommand()) return;
 
@@ -33,3 +32,17 @@ client.on(Events.InteractionCreate, async interaction => {
 });
 
 client.login(TOKEN);
+=======
+(async () => {
+    try {
+        console.log('Started refreshing global commands...');
+        await rest.put(
+            Routes.applicationCommands(process.env.CLIENT_ID), // <-- global!
+            { body: commands }
+        );
+        console.log('Successfully reloaded global commands.');
+    } catch (error) {
+        console.error(error);
+    }
+})();
+>>>>>>> 0f93f42 (Update Deploy-commqnds.js)
