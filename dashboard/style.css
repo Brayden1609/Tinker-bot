@@ -11,7 +11,7 @@ a {
     color: inherit;
 }
 
-/* ====== Header & Tabs ====== */
+/* ====== Header ====== */
 header {
     background-color: #1e1e1e;
     padding: 1rem 0;
@@ -24,40 +24,53 @@ header h1 {
     font-size: 2rem;
 }
 
-header .tabs {
+/* ====== Tabs ====== */
+.tabs {
     display: flex;
     justify-content: center;
-    gap: 2rem;
+    gap: 1rem;
+    border-bottom: 2px solid #333;
+    background-color: #1e1e1e;
 }
 
-header .tabs a {
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: background 0.2s, color 0.2s;
+.tabs button {
+    background: none;
+    border: none;
     color: #aaa;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: color 0.2s, border-bottom 0.2s;
+    border-bottom: 3px solid transparent;
 }
 
-header .tabs a.active,
-header .tabs a:hover {
-    background-color: #333;
+.tabs button.active {
+    color: #ff79c6;
+    border-bottom: 3px solid #ff79c6;
+}
+
+.tabs button:hover {
     color: #fff;
 }
 
-/* ====== Main Content ====== */
-main {
+/* ====== Tab Panels ====== */
+.tab-content {
+    display: none;
     padding: 2rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
+    animation: fadeIn 0.3s ease-in;
 }
 
-/* ====== Panels ====== */
+.tab-content.active {
+    display: block;
+}
+
+/* ====== Panels inside tabs ====== */
 section {
     background-color: #1e1e1e;
     padding: 1.5rem;
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    margin-bottom: 1.5rem;
 }
 
 section h2 {
@@ -66,7 +79,7 @@ section h2 {
 }
 
 /* ====== Buttons ====== */
-button {
+button.panel-btn {
     background-color: #444;
     border: none;
     color: #fff;
@@ -77,11 +90,12 @@ button {
     transition: background 0.2s;
 }
 
-button:hover {
+button.panel-btn:hover {
     background-color: #ff79c6;
 }
 
-/* ====== Paragraphs & Info ====== */
-p {
-    line-height: 1.6;
+/* ====== Animations ====== */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
