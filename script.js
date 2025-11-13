@@ -4,7 +4,7 @@ const commandInput = document.getElementById('commandInput');
 const commandResultEl = document.getElementById('commandResult');
 const activityFeed = document.getElementById('activityFeed');
 
-const API_BASE = 'https://tinker-bot-rose.vercel.app/'
+const API_BASE = 'https://tinker-bot-rose.vercel.app/';
 
 // ---- BOT STATUS ----
 async function getStatus() {
